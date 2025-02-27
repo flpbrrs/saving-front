@@ -13,7 +13,7 @@ function FormField(props: ContainerProps) {
     )
 
     return (
-        <div className="flex flex-col gap-1">   
+        <div className="flex flex-col gap-1 w-full">
             <div className={`
                 flex gap-2 relative px-2.5 py-2 w-full
                 text-sm border rounded-lg
