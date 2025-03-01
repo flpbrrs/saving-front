@@ -28,7 +28,10 @@ export default function LoginRegister() {
                 <div className="form-subtitle">
                     Preencha os campos abaixo para se cadastrar.
                 </div>
-                <RegisterForm />
+                <RegisterForm 
+                    isInRegisterContext={!change}
+                    toogleToLogin={() => setChange(false)}
+                />
             </motion.section>
 
             <motion.section
@@ -44,7 +47,7 @@ export default function LoginRegister() {
                 <div className="form-subtitle">
                     Por favor, forneça suas credenciais para usar o app.
                 </div>
-                <LoginForm />
+                <LoginForm isInLoginContext={change}/>
                 <CallToActionLink label="Ainda não tem conta?" CTA="Registre-se" action={() => setChange(!change)} />
             </motion.section>
             
