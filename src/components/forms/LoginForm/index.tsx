@@ -4,14 +4,18 @@ import FormField from "@/components/formComponents/FormField";
 import HideShowIcon from "@/components/HideShowIcon";
 import useLoginFormHandler from "./loginForm.handler";
 
-export default function LoginForm() {
+interface LoginFormProps {
+    isInLoginContext: boolean
+}
+
+export default function LoginForm({ isInLoginContext }: LoginFormProps) {
     const {
         register,
         onSubmit,
         errors,
         passwordIsVisible,
         tooglePasswordVisibility
-    } = useLoginFormHandler()
+    } = useLoginFormHandler({ isInLoginContext })
 
     return (
         <form
@@ -46,6 +50,12 @@ export default function LoginForm() {
                     {errors.senha?.message}
                 </FormField.Error>
             </FormField>
+
+            <div className="text-center">
+                <FormField.Error>
+                    {errors.root?.message}
+                </FormField.Error>
+            </div>
 
             <button type="submit" className="app-btn">
                 Login

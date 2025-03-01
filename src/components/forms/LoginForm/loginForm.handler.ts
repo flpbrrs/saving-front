@@ -1,22 +1,41 @@
 'use client'
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { loginFormData, loginFormSchema } from './loginForm.schema'
 import { zodResolver } from "@hookform/resolvers/zod";
+import useAuth from "@/hooks/useAuth";
 
-export default function useLoginFormHandler() {
+interface loginHandlerProps {
+    isInLoginContext: boolean
+}
+
+export default function useLoginFormHandler(props: loginHandlerProps) {
     const [passwordIsVisible, setPasswordVisibility] = useState(false);
+    const { login } = useAuth()
 
     const {
         register,
         handleSubmit,
+        setError,
+        reset,
         formState: { errors }
     } = useForm<loginFormData>({
         resolver: zodResolver(loginFormSchema)
     })
 
-    const onSubmit = handleSubmit((data) => console.log(data))
+    useEffect(() => {
+        if (!props.isInLoginContext)
+            reset()
+    }, [props.isInLoginContext])
+
+    const onSubmit = handleSubmit(async (data) => {
+        try {
+            await login(data.email, data.senha)
+        } catch (e: any) {
+            setError('root', { message: e.message })
+        }
+    })
 
     return ({
         register,

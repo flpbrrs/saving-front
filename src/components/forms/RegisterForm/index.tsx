@@ -4,7 +4,12 @@ import FormField from "@/components/formComponents/FormField"
 import useRegisterFormHandler from "./registerForm.handler"
 import HideShowIcon from "@/components/HideShowIcon"
 
-export default function RegisterForm() {
+interface RegisterFormProps {
+    isInRegisterContext: boolean,
+    toogleToLogin: () => void
+}
+
+export default function RegisterForm({ toogleToLogin, isInRegisterContext }: RegisterFormProps) {
     const {
         register,
         onSubmit,
@@ -13,11 +18,17 @@ export default function RegisterForm() {
         tooglePasswordVisibility,
         confirmIsVisible,
         toogleConfirmVisibility
-    } = useRegisterFormHandler()
+    } = useRegisterFormHandler({ isInRegisterContext })
+
+    function handleRedirectAfterSubmit(e: any) {
+        e.preventDefault()
+        onSubmit()
+        toogleToLogin()
+    }
 
     return (
         <form
-            onSubmit={onSubmit} 
+            onSubmit={handleRedirectAfterSubmit} 
             className="w-full mt-4 flex flex-col gap-4 max-w-96"
         >
             <div className="flex gap-2 w-full">
