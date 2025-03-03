@@ -19,7 +19,7 @@ export default function useLoginFormHandler(props: loginHandlerProps) {
         handleSubmit,
         setError,
         reset,
-        formState: { errors }
+        formState: { errors, isSubmitting }
     } = useForm<loginFormData>({
         resolver: zodResolver(loginFormSchema)
     })
@@ -41,6 +41,7 @@ export default function useLoginFormHandler(props: loginHandlerProps) {
         register,
         errors,
         onSubmit,
+        isSubmitting,
         passwordIsVisible,
         tooglePasswordVisibility: () => setPasswordVisibility(!passwordIsVisible)
     })

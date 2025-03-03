@@ -3,6 +3,7 @@
 import FormField from "@/components/formComponents/FormField";
 import HideShowIcon from "@/components/HideShowIcon";
 import useLoginFormHandler from "./loginForm.handler";
+import { TbLoader2 as IconSpin } from 'react-icons/tb'
 
 interface LoginFormProps {
     isInLoginContext: boolean
@@ -13,6 +14,7 @@ export default function LoginForm({ isInLoginContext }: LoginFormProps) {
         register,
         onSubmit,
         errors,
+        isSubmitting,
         passwordIsVisible,
         tooglePasswordVisibility
     } = useLoginFormHandler({ isInLoginContext })
@@ -57,8 +59,9 @@ export default function LoginForm({ isInLoginContext }: LoginFormProps) {
                 </FormField.Error>
             </div>
 
-            <button type="submit" className="app-btn">
-                Login
+            <button type="submit" className="app-btn" disabled={isSubmitting}>
+                { isSubmitting && <IconSpin className="animate-spin"/>}
+                <span>Login</span>
             </button>
         </form>
     )
