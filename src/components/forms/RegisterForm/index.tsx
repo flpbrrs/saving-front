@@ -3,6 +3,7 @@
 import FormField from "@/components/formComponents/FormField"
 import useRegisterFormHandler from "./registerForm.handler"
 import HideShowIcon from "@/components/HideShowIcon"
+import { TbLoader2 as IconSpin } from 'react-icons/tb'
 
 interface RegisterFormProps {
     isInRegisterContext: boolean,
@@ -15,51 +16,33 @@ export default function RegisterForm({ toogleToLogin, isInRegisterContext }: Reg
         onSubmit,
         errors,
         passwordIsVisible,
+        isSubmitting,
         tooglePasswordVisibility,
         confirmIsVisible,
         toogleConfirmVisibility
-    } = useRegisterFormHandler({ isInRegisterContext })
-
-    function handleRedirectAfterSubmit(e: any) {
-        e.preventDefault()
-        onSubmit()
-        toogleToLogin()
-    }
+    } = useRegisterFormHandler({ 
+        isInRegisterContext,
+        submitCallback: () => toogleToLogin()
+    })
 
     return (
         <form
-            onSubmit={handleRedirectAfterSubmit} 
+            onSubmit={onSubmit} 
             className="w-full mt-4 flex flex-col gap-4 max-w-96"
-        >
-            <div className="flex gap-2 w-full">
-                <FormField hasError={errors.nome}>
-                    <FormField.Label htmlFor="register_nome">
-                        Nome
-                    </FormField.Label>
-                    <FormField.Input
-                        id="register_nome"
-                        type="text"
-                        {...register('nome')}
-                    />
-                    <FormField.Error>
-                        {errors.nome?.message}
-                    </FormField.Error>
-                </FormField>
-
-                <FormField hasError={errors.sobrenome}>
-                    <FormField.Label htmlFor="register_sobrenome">
-                        Sobrenome
-                    </FormField.Label>
-                    <FormField.Input
-                        id="register_sobrenome"
-                        type="text"
-                        {...register('sobrenome')}
-                    />
-                    <FormField.Error>
-                        {errors.sobrenome?.message}
-                    </FormField.Error>
-                </FormField>
-            </div>
+        >   
+            <FormField hasError={errors.nome}>
+                <FormField.Label htmlFor="register_nome">
+                    Nome
+                </FormField.Label>
+                <FormField.Input
+                    id="register_nome"
+                    type="text"
+                    {...register('nome')}
+                />
+                <FormField.Error>
+                    {errors.nome?.message}
+                </FormField.Error>
+            </FormField>
             <FormField hasError={errors.email}>
                 <FormField.Label htmlFor="register_email">
                     E-mail
@@ -114,8 +97,16 @@ export default function RegisterForm({ toogleToLogin, isInRegisterContext }: Reg
                     </FormField.Error>
                 </FormField>
             </div>
-            <button type="submit" className="app-btn">
-                Criar conta
+
+            <div className="text-center">
+                <FormField.Error>
+                    {errors.root?.message}
+                </FormField.Error>
+            </div>
+
+            <button type="submit" className="app-btn" disabled={isSubmitting}>
+                { isSubmitting && <IconSpin className="animate-spin"/>}
+                <span>Criar conta</span>
             </button>
         </form>
     )

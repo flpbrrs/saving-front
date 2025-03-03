@@ -28,7 +28,7 @@ export default function LoginForm({ isInLoginContext }: LoginFormProps) {
                 <FormField.Label htmlFor="login_email">E-mail</FormField.Label>
                 <FormField.Input
                     id="login_email"
-                    {...register('email', { required: "Informe o campo E-mail"})}
+                    {...register('email')}
                 />
                 <FormField.Error>
                     {errors.email?.message}
@@ -40,7 +40,7 @@ export default function LoginForm({ isInLoginContext }: LoginFormProps) {
                 <FormField.Input
                     id="login_senha"
                     type={passwordIsVisible ? 'text' : 'password'}
-                    {...register('senha', { required: 'Informe o campo Senha'})}
+                    {...register('senha')}
                 />
                 <FormField.EndAdornment>
                     <HideShowIcon

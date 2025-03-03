@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 interface AuthContextType {
     loggedUser: Usuario | null,
     login: (email: string, senha: string) => Promise<void>,
+    register: (nome: string, email: string, senha: string) => Promise<void>,
     logout: () => Promise<void>
 }
 
@@ -62,7 +63,21 @@ export default function AuthProvider(
             if(e.response.status === 401)
                 throw new Error(e.response.data.erros);
             
-            throw new Error("Ops! Algo está errado! Tente novamento mais tarde")
+            throw new Error("Ops, algo está errado! Tente novamente mais tarde")
+        }
+    }
+
+    const register = async (nome: string, email: string, senha: string) => {
+        try {
+            await api.post<{ usuario: Usuario }>(
+                '/register',
+                { nome, email, senha }
+            )
+        } catch (e: any) {
+            if(e.response.status === 400)
+                throw new Error(e.response.data.erros)
+
+            throw new Error("Ops, algo está errado! Tente novamente mais tarde")
         }
     }
 
@@ -72,12 +87,14 @@ export default function AuthProvider(
         localStorage.removeItem("authToken");
         setLoggedUser(null);
         queryClient.clear();
+        router.push('/login')
     }
 
     return (
         <AuthContext.Provider value={{ 
             loggedUser,
             login,
+            register,
             logout
         }}>
             {!loading && children}

@@ -4,9 +4,6 @@ export const registerFormSchema = z.object({
     nome: z.string()
         .nonempty('É preciso informar seu nome')
         .min(2, 'Mínimo de 2 caracteres'),
-    sobrenome: z.string()
-        .nonempty('Preciso informar pelo menos 1 sobrenome')
-        .min(2, 'Mínimo de 2 caracteres'),
     email: z.string()
         .email('O e-mail não está no formato esperado.')
         .nonempty('Informe o campo de e-mail.'),
