@@ -86,7 +86,6 @@ export default function AuthProvider(
         localStorage.removeItem("authToken");
         setLoggedUser(null);
         queryClient.clear();
-        router.push('/login')
     }
 
     return (
