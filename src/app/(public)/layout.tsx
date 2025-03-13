@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         if (loggedUser)
-            router.push('/home')
+            router.push('/')
     }, [loggedUser, router])
 
     if (loggedUser)

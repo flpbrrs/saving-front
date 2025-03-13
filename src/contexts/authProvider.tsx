@@ -32,10 +32,10 @@ export default function AuthProvider(
     
         if (token) {
           try {
-            const { data } = await api.get<Usuario>("/me", {
+            const { data } = await api.get("/me", {
               headers: { Authorization: `Bearer ${token}` },
             });
-            setLoggedUser(data);
+            setLoggedUser(data.usuario);
           } catch (error) {
             localStorage.removeItem("authToken");
           }
@@ -58,7 +58,6 @@ export default function AuthProvider(
 
             localStorage.setItem("authToken", data.token);
             setLoggedUser(data.usuario)
-            router.push('/home')
         } catch (e: any) {
             if(e.response.status === 401)
                 throw new Error(e.response.data.erros);
