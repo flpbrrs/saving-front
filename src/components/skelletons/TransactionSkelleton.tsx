@@ -4,6 +4,7 @@ import {
     TbPlus as IconPlus,
     TbChevronLeft as IconLeft,
     TbChevronRight as IconRight,
+    TbCashRegister,
 } from "react-icons/tb"
 
 export default function TransactionSkelleton() {
@@ -91,6 +92,12 @@ export default function TransactionSkelleton() {
                                 </tr>
                             </thead>
                         </table>
+                        <div className="flex items-center justify-center flex-col gap-1 text-lg text-zinc-300 h-24">
+                            <TbCashRegister size={24}/>
+                            <div>
+                                Sem transações...
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
