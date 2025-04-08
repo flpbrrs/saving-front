@@ -12,10 +12,11 @@ const messageTranslator: ErrorMessageTranslator = {
     empty: 'não pode ser vazio.',
     invalid: 'está inválido.',
     weak: 'precisa conter números, caracteres especiais, letras maiúsculas e minúsculas.',
-    "missing-surname": 'está faltando o sobrenome',
+    'missing-surname': 'está faltando o sobrenome',
     'server-error': 'erro interno no servidor.',
-    'too-short': "é muito pequeno.",
-    'user-already-exists': "Um usuário com este e-mail já existe."
+    'too-short': 'é muito pequeno.',
+    'user-already-exists': 'Este e-mail já está em uso.',
+    'invalid-credentials': 'Credenciais inválidas.'
 }
 
 interface TranslatedError {
