@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
+import { Path, useForm } from "react-hook-form"
 import { registerFormData, registerFormSchema } from "./registerForm.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import useNotification from "@/hooks/useNotification"
 import useAuth from "@/hooks/useAuth"
+import useCoreTranslator from "@/hooks/useCoreTranslator"
 
 interface registerHandlerProps {
     isInRegisterContext: boolean,
@@ -15,6 +16,7 @@ interface registerHandlerProps {
 export default function useRegisterFormHandler(props: registerHandlerProps) {
     const [passwordIsVisible, setPasswordVisibility] = useState<boolean>(false)
     const [confirmIsVisible, setConfirmVisibility] = useState<boolean>(false)
+    const { parse } = useCoreTranslator()
     const { register: registerFn } = useAuth()
 
     const { notify } = useNotification()
@@ -41,7 +43,10 @@ export default function useRegisterFormHandler(props: registerHandlerProps) {
             reset()
             props.submitCallback()
         } catch (e: any) {
-            setError('root', { message: e.message })
+            const translatedErrors = parse(e.message)
+            translatedErrors.forEach(({ field, error }) => {
+                setError(field as Path<registerFormData>, error)
+            })
         }
     })
 
