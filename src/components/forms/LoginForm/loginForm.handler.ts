@@ -1,10 +1,11 @@
 'use client'
 
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { Path, useForm } from "react-hook-form";
 import { loginFormData, loginFormSchema } from './loginForm.schema'
 import { zodResolver } from "@hookform/resolvers/zod";
 import useAuth from "@/hooks/useAuth";
+import useCoreTranslator from "@/hooks/useCoreTranslator";
 
 interface loginHandlerProps {
     isInLoginContext: boolean
@@ -12,6 +13,7 @@ interface loginHandlerProps {
 
 export default function useLoginFormHandler(props: loginHandlerProps) {
     const [passwordIsVisible, setPasswordVisibility] = useState(false);
+    const { parse } = useCoreTranslator()
     const { login } = useAuth()
 
     const {
@@ -33,7 +35,10 @@ export default function useLoginFormHandler(props: loginHandlerProps) {
         try {
             await login(data.email, data.senha)
         } catch (e: any) {
-            setError('root', { message: e.message })
+            const translatedErrors = parse(e.message)
+            translatedErrors.forEach(({ field, error }) => {
+                setError(field as Path<loginFormData>, error)
+            })
         }
     })
 
