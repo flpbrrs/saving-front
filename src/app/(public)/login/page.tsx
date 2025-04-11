@@ -11,7 +11,7 @@ export default function LoginRegister() {
     const [change, setChange] = useState(false);
 
     return (
-        <div className="bg-gray-50 h-full flex p-4 gap-4 relative overflow-hidden">
+        <div className="bg-gray-50 h-screen flex p-4 gap-4 relative overflow-hidden">
             <motion.section
                 initial={false}
                 animate={{ x: change ? "0%" : "-100%" }}

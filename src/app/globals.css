@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-    @apply h-screen bg-zinc-50;
+    @apply h-screen bg-red-500;
 }
 
 @layer components {
