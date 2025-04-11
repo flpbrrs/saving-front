@@ -54,26 +54,28 @@ export default function TransactionSkelleton() {
                         <p className="text-xl font-bold">
                             Histórico de transação 
                         </p>
-                        <div className="flex items-center gap-2">
-                            <button className="p-1 rounded-sm hover:bg-zinc-100" disabled>
-                                <IconLeft />
-                            </button>
-                            <p>{(new Date().getMonth() + 1).toString().padStart(2, '0')}/{new Date().getFullYear()}</p>
-                            <button className="p-1 rounded-sm hover:bg-zinc-100" disabled>
-                                <IconRight />
+                        <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-2">
+                                <button className="p-1 rounded-sm hover:bg-zinc-100" disabled>
+                                    <IconLeft />
+                                </button>
+                                <p>{(new Date().getMonth() + 1).toString().padStart(2, '0')}/{new Date().getFullYear()}</p>
+                                <button className="p-1 rounded-sm hover:bg-zinc-100" disabled>
+                                    <IconRight />
+                                </button>
+                            </div>
+                            <button
+                                disabled
+                                className="
+                                    bg-emerald-400 px-2 py-1 rounded-lg 
+                                    text-gray-100 font-bold 
+                                    flex items-center gap-2 h-8
+                                    hover:bg-emerald-500 hover:scale-[101%]"
+                                >
+                                <IconPlus />
+                                Nova transação
                             </button>
                         </div>
-                        <button
-                            disabled
-                            className="
-                                bg-emerald-400 px-2 py-1 rounded-lg 
-                                text-gray-100 font-bold 
-                                flex items-center gap-2 h-8
-                                hover:bg-emerald-500 hover:scale-[101%]"
-                            >
-                            <IconPlus />
-                            Nova transação
-                        </button>
                     </div>
                     <div className="relative overflow-x-auto">
                         <table className="w-full text-sm text-left text-gray-500 select-none">
