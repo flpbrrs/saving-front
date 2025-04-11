@@ -56,47 +56,45 @@ export default function RegisterForm({ toogleToLogin, isInRegisterContext }: Reg
                     {errors.email?.message}
                 </FormField.Error>
             </FormField>
-            <div className="flex gap-2 w-full">
-                <FormField hasError={errors.senha}>
-                    <FormField.Label htmlFor="register_senha">
-                        Senha
-                    </FormField.Label>
-                    <FormField.Input
-                        id="register_senha"
-                        type={passwordIsVisible ? 'text' : 'password'}
-                        {...register('senha')}
+            <FormField hasError={errors.senha}>
+                <FormField.Label htmlFor="register_senha">
+                    Senha
+                </FormField.Label>
+                <FormField.Input
+                    id="register_senha"
+                    type={passwordIsVisible ? 'text' : 'password'}
+                    {...register('senha')}
+                />
+                <FormField.EndAdornment>
+                    <HideShowIcon
+                        isVisible={passwordIsVisible}
+                        onToogle={tooglePasswordVisibility}
                     />
-                    <FormField.EndAdornment>
-                        <HideShowIcon
-                            isVisible={passwordIsVisible}
-                            onToogle={tooglePasswordVisibility}
-                        />
-                    </FormField.EndAdornment>
-                    <FormField.Error>
-                        {errors.senha?.message}
-                    </FormField.Error>
-                </FormField>
+                </FormField.EndAdornment>
+                <FormField.Error>
+                    {errors.senha?.message}
+                </FormField.Error>
+            </FormField>
 
-                <FormField hasError={errors.confirmarSenha}>
-                    <FormField.Label htmlFor="register_confirmarSenha">
-                        Confirmar Senha
-                    </FormField.Label>
-                    <FormField.Input
-                        id="register_confirmarSenha"
-                        type={confirmIsVisible ? 'text' : 'password'}
-                        {...register('confirmarSenha')}
+            <FormField hasError={errors.confirmarSenha}>
+                <FormField.Label htmlFor="register_confirmarSenha">
+                    Confirmar Senha
+                </FormField.Label>
+                <FormField.Input
+                    id="register_confirmarSenha"
+                    type={confirmIsVisible ? 'text' : 'password'}
+                    {...register('confirmarSenha')}
+                />
+                <FormField.EndAdornment>
+                    <HideShowIcon
+                        isVisible={confirmIsVisible}
+                        onToogle={toogleConfirmVisibility}
                     />
-                    <FormField.EndAdornment>
-                        <HideShowIcon
-                            isVisible={confirmIsVisible}
-                            onToogle={toogleConfirmVisibility}
-                        />
-                    </FormField.EndAdornment>
-                    <FormField.Error>
-                        {errors.confirmarSenha?.message}
-                    </FormField.Error>
-                </FormField>
-            </div>
+                </FormField.EndAdornment>
+                <FormField.Error>
+                    {errors.confirmarSenha?.message}
+                </FormField.Error>
+            </FormField>
 
             <div className="text-center">
                 <FormField.Error>
