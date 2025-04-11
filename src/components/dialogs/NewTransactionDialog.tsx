@@ -3,11 +3,13 @@ import {TbPlus as IconPlus} from "react-icons/tb"
 
 interface DialogProps {
     children?: React.ReactNode
+    isOpen: boolean
+    onOpenChange: (state: boolean) => void
 }
 
 export default function NewTransactionDialog(props: DialogProps) {
     return (
-        <Dialog.Root>
+        <Dialog.Root open={props.isOpen} onOpenChange={props.onOpenChange}>
             <Dialog.Trigger>
                 <button className="
                     bg-emerald-400 px-2 py-1 rounded-lg 
