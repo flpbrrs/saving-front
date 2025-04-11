@@ -13,6 +13,7 @@ export interface AdornmentProps {
 
 export interface ComponentStructure {
     Input: React.ReactNode | null
+    Select: React.ReactNode | null
     Label: React.ReactNode | null
     EndAdornment: React.ReactNode | null
     Error: React.ReactNode | null

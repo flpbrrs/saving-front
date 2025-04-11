@@ -5,6 +5,7 @@ import Input from "./formField.input"
 import Label from "./formField.label"
 import Adornment from "./formField.adornment"
 import Error from "./formField.error"
+import Select from "./formField.select"
 
 function FormField(props: ContainerProps) {
     const ff = extractSubComponents<ComponentStructure>(
@@ -23,7 +24,7 @@ function FormField(props: ContainerProps) {
                     ? "border-red-500 text-red-500"
                     : "border-gray-500 text-gray-500"}    
             `}>
-                {ff.Input}
+                {ff.Input || ff.Select}
                 {ff.Label}
                 {ff.EndAdornment}
             </div>
@@ -36,5 +37,6 @@ FormField.Input = Input
 FormField.Label = Label
 FormField.EndAdornment = Adornment
 FormField.Error = Error
+FormField.Select = Select
 
 export default FormField 
