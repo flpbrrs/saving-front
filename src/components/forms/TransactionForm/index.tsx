@@ -58,7 +58,7 @@ export default function TransactionForm(props: FormProps) {
                         </FormField.Label>
                         <FormField.Input
                             id="transaction_value"
-                            value={field.value}
+                            value={field.value ?? ""}
                             onChange={(event) =>
                                 field.onChange(applyMoneyMask(event.target.value))
                             }
@@ -88,7 +88,7 @@ export default function TransactionForm(props: FormProps) {
                     id="transaction_type"
                     {...register("tipo")}
                 >
-                    <option value="">Selecione uma opção...</option>
+                    <option value="" disabled>Selecione uma opção...</option>
                     <option value="income">Entrada</option>
                     <option value="expense">Saída</option>
                 </FormField.Select>

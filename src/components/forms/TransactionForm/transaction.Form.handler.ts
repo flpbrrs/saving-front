@@ -5,6 +5,7 @@ import { transactionFormData, transactionFormSchema } from "./transactionForm.sc
 import { zodResolver } from "@hookform/resolvers/zod"
 import useNotification from "@/hooks/useNotification"
 import useCoreTranslator from "@/hooks/useCoreTranslator"
+import useCreateTransaction from "@/hooks/transactions/useCreateTransaction"
 
 interface transactionHandlerProps {
     submitCallback: () => void
@@ -13,6 +14,7 @@ interface transactionHandlerProps {
 export default function useTransactionFormHandler(props: transactionHandlerProps) {
     const { parse } = useCoreTranslator()
     const { notify } = useNotification()
+    const { mutate: registerTransaction, isPending } = useCreateTransaction()
 
     const {
         register,
@@ -27,7 +29,7 @@ export default function useTransactionFormHandler(props: transactionHandlerProps
 
     const onSubmit = handleSubmit(async (data) => {
         try {
-            console.log(data)
+            registerTransaction(data)
             notify('Transação registrada!')
             reset()
             props.submitCallback()
