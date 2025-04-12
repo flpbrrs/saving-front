@@ -14,7 +14,7 @@ interface transactionHandlerProps {
 export default function useTransactionFormHandler(props: transactionHandlerProps) {
     const { parse } = useCoreTranslator()
     const { notify } = useNotification()
-    const { mutate: registerTransaction, isPending } = useCreateTransaction()
+    const { mutateAsync: registerTransaction } = useCreateTransaction()
 
     const {
         register,
@@ -29,12 +29,13 @@ export default function useTransactionFormHandler(props: transactionHandlerProps
 
     const onSubmit = handleSubmit(async (data) => {
         try {
-            registerTransaction(data)
+            await registerTransaction(data)
             notify('Transação registrada!')
             reset()
             props.submitCallback()
         } catch (e: any) {
-            const translatedErrors = parse(e.message)
+            console.log(e.response.data.erros)
+            const translatedErrors = parse(e.response.data.erros)
             translatedErrors.forEach(({ field, error }) => {
                 setError(field as Path<transactionFormData>, error)
             })

@@ -94,6 +94,13 @@ export default function TransactionForm(props: FormProps) {
                 </FormField.Select>
                 <FormField.Error>{errors.tipo?.message}</FormField.Error>
             </FormField>
+
+            <div className="text-center">
+                <FormField.Error>
+                    {errors.root?.message}
+                </FormField.Error>
+            </div>
+
             <div className="pt-4 border-t border-zinc-100 flex items-center justify-end gap-4">
                 <Dialog.Close className="text-zinc-400">
                     Cancelar
