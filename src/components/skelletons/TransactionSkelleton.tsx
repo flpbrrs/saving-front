@@ -9,7 +9,7 @@ import {
 
 export default function TransactionSkelleton() {
     return (
-        <div className="bg-zinc-50 h-full">
+        <div className="bg-zinc-50 min-h-screen">
             <AppBanner nomeUsuarioLogado="user"/>
             <section className="max-w-5xl mx-auto -mt-8 z-10 flex flex-col gap-4 pb-8">
                 <div className="card">
