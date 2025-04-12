@@ -26,8 +26,10 @@ export default function ExpenseAnalyseChart({ data }: ChartProps) {
     };
 
     const bgColors = useMemo(() => {
-        if (!data) return [];
-        return Object.keys(data).map(getColorForKey);
+        if (!data || data.length === 0) return [];
+        return Object.keys(data[0])
+            .filter(key => key !== "name")
+            .map(getColorForKey);
     }, [data]);
 
     const renderLegend = (props:any) => {
@@ -41,7 +43,7 @@ export default function ExpenseAnalyseChart({ data }: ChartProps) {
                         <p className="text-sm text-zinc-400">{String(entry.dataKey).toLocaleUpperCase()}</p>
                     </div>
                     <p className="font-bold text-xs">
-                        R$ {Number(data[entry.dataKey] as any).toFixed(2)}
+                        R$ {Number(data[0][entry.dataKey]).toFixed(2)}
                     </p>
                 </div>
             ))}
@@ -61,23 +63,25 @@ export default function ExpenseAnalyseChart({ data }: ChartProps) {
         <ResponsiveContainer height={64} width={"100%"}>
             <BarChart
                 layout="vertical"
-                data={[data]}
+                data={data}
                 stackOffset="expand"
             >
-                <YAxis hide type="category"/>
+                <YAxis hide type="category" dataKey="label" />
                 <XAxis hide type="number" />
                 <Legend 
                     content={renderLegend}
                     wrapperStyle={{ bottom: -4}}
                 />
-                {Object.keys(data).map((analyse, index) => (
-                    <Bar 
-                        key={index}
-                        dataKey={analyse}
-                        stackId="a"
-                        fill={bgColors[index]}
-                        radius={[10, 10, 10, 10]}
-                    />
+                {Object.keys(data[0])
+                    .filter(key => key !== "name")
+                    .map((key, index) => (
+                        <Bar
+                            key={key}
+                            dataKey={key}
+                            stackId="a"
+                            fill={bgColors[index]}
+                            radius={[10, 10, 10, 10]}
+                        />
                 ))}
             </BarChart>
         </ResponsiveContainer>
