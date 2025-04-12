@@ -6,6 +6,7 @@ const fieldTranslator: FieldTranslator = {
     email: 'email',
     password: 'senha',
     surname: 'sobrenome',
+    description: 'descricao'
 }
 
 const messageTranslator: ErrorMessageTranslator = {
